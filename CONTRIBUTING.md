@@ -4,6 +4,7 @@
 * [Browse our issues](#browse-our-issues)
 * [Build from source](#build-from-source)
 * [Create a pull request](#create-a-pull-request)
+* [Working with upstream branches](#working-with-upstream-branches)
 * [Contribution checklist](#contribution-checklist)
 * [Contributor License Agreement (CLA)](#contributor-license-agreement-cla)
 * [Commit message conventions](#commit-message-conventions)
@@ -108,6 +109,76 @@ A pull request can be submitted as follows:
 1. Commit and push your changes to a branch in your fork
 1. [Submit a Pull Request to the CIB seven repository](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork). As the *base* branch (the one that you contribute to), select `main`. This should also be the default in the Github UI.
 1. In the pull request description, reference the github issue that your pull request addresses.
+
+# Working with upstream branches
+
+If you have forked the CIB seven repository, you may want to fetch branches from the upstream (original) repository to stay in sync or to work with features being developed upstream. Here's how to do this:
+
+## Set up the upstream remote
+
+First, add the upstream repository as a remote (you only need to do this once):
+
+```bash
+git remote add upstream https://github.com/cibseven/cibseven.git
+```
+
+Verify that the upstream remote was added successfully:
+
+```bash
+git remote -v
+```
+
+You should see both `origin` (your fork) and `upstream` (the original repository) listed.
+
+## Fetch branches from upstream
+
+To fetch all branches from the upstream repository:
+
+```bash
+git fetch upstream
+```
+
+This downloads all branches and their commits from the upstream repository, but doesn't merge them into your local branches.
+
+## List available upstream branches
+
+To see all branches available from upstream:
+
+```bash
+git branch -r | grep upstream
+```
+
+## Work with an upstream branch
+
+To check out an upstream branch and create a local tracking branch:
+
+```bash
+git checkout -b <branch-name> upstream/<branch-name>
+```
+
+For example, to work with the upstream `main` branch:
+
+```bash
+git checkout -b main upstream/main
+```
+
+## Keep your fork up to date
+
+To update your fork's main branch with the latest changes from upstream:
+
+```bash
+# Switch to your main branch
+git checkout main
+
+# Fetch the latest changes from upstream
+git fetch upstream
+
+# Merge upstream changes into your main branch
+git merge upstream/main
+
+# Push the updates to your fork
+git push origin main
+```
 
 # Contribution checklist
 
